@@ -17,3 +17,8 @@ A VS Code extension that adds an **"Open in WSL Terminal"** context menu item fo
 2. Right-click on any folder.
 3. Click **Open in WSL Terminal**.
 
+## License
+
+[MIT](LICENSE)
+
+

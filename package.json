@@ -3,6 +3,11 @@
   "displayName": "WSL Here",
   "description": "Opens WSL in selected folder via the menu",
   "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SkyStrike/vscode-ext-wsl-here.git"
+  },
   "engines": {
     "vscode": "^1.125.0"
   },
