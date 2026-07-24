@@ -2,6 +2,7 @@
   "name": "wsl-here",
   "displayName": "WSL Here",
   "description": "Opens WSL in selected folder via the menu",
+  "publisher": "SkyStrike",
   "version": "0.0.1",
   "license": "MIT",
   "repository": {
