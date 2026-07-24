@@ -30,7 +30,12 @@
         {
           "command": "wslFolderMenu.openInWsl",
           "when": "explorerResourceIsFolder",
-          "group": "navigation@10"
+          "group": "navigation@100"
+        },
+        {
+          "command": "wslFolderMenu.openInWsl",
+          "when": "!explorerResourceIsFolder && !inputFocus",
+          "group": "navigation@100"
         }
       ]
     }
