@@ -38,6 +38,32 @@
           "group": "navigation@100"
         }
       ]
+    },
+    "configuration": {
+      "title": "WSL Here",
+      "properties": {
+        "wslHere.shellPath": {
+          "type": "string",
+          "default": "C:\\Windows\\System32\\wsl.exe",
+          "description": "Path to the WSL executable."
+        },
+        "wslHere.shellArgs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "default": [
+            "-d",
+            "Ubuntu"
+          ],
+          "description": "Command line arguments passed to WSL (e.g. [\"-d\", \"Ubuntu\"])."
+        },
+        "wslHere.customCwd": {
+          "type": "string",
+          "default": "",
+          "description": "Optional custom working directory override. Leave empty to use selected item directory path."
+        }
+      }
     }
   },
   "scripts": {

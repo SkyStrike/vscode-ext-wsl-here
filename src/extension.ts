@@ -11,12 +11,20 @@ export function activate(context: vscode.ExtensionContext) {
             return;
         }
 
-        // Open a new terminal session running WSL in the right-clicked folder
+        // Read user/workspace settings
+        const config = vscode.workspace.getConfiguration('wslHere');
+        const shellPath = config.get<string>('shellPath', 'C:\\Windows\\System32\\wsl.exe');
+        const shellArgs = config.get<string[]>('shellArgs', ['-d', 'Ubuntu']);
+        const customCwd = config.get<string>('customCwd', '');
+
+        const cwd = customCwd || uri.fsPath;
+
+        // Open a new terminal session running WSL in the right-clicked folder (or custom cwd)
         const terminal = vscode.window.createTerminal({
             name: "WSL Terminal",
-            shellPath: "C:\\Windows\\System32\\wsl.exe",
-            shellArgs: ["-d", "Ubuntu"], // Adjust distro name if needed
-            cwd: uri.fsPath
+            shellPath: shellPath,
+            shellArgs: shellArgs,
+            cwd: cwd
         });
 
         terminal.show();

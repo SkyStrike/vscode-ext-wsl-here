@@ -17,6 +17,16 @@ A VS Code extension that adds an **"Open in WSL Terminal"** context menu item fo
 2. Right-click on any folder.
 3. Click **Open in WSL Terminal**.
 
+## Extension Settings
+
+This extension contributes the following settings (`wslHere.*`):
+
+| Setting | Type | Default | Description |
+| --- | --- | --- | --- |
+| `wslHere.shellPath` | `string` | `C:\Windows\System32\wsl.exe` | Path to the WSL executable executable. |
+| `wslHere.shellArgs` | `array` | `["-d", "Ubuntu"]` | Arguments passed when starting WSL (e.g. distro specified with `["-d", "<distro>"]`). |
+| `wslHere.customCwd` | `string` | `""` | Optional working directory path override. Leave empty to default to the selected folder. |
+
 ## License
 
 [MIT](LICENSE)
