@@ -28,6 +28,15 @@ jobs:
         with:
           fetch-depth: 0
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: 'npm'
+
+      - name: Install Project Dependencies
+        run: npm ci
+
       - name: Bump Version and Create Tag
         id: tag_version
         uses: anothrNick/github-tag-action@1.64.0
@@ -37,12 +46,26 @@ jobs:
           INITIAL_VERSION: 1.0.0
           WITH_V: true
 
+      - name: Update package.json Version & Package VSIX
+        if: ${{ steps.tag_version.outputs.new_tag }}
+        run: |
+          # Strip leading 'v' from new tag if present (e.g. v1.0.0 -> 1.0.0)
+          CLEAN_VERSION="${NEW_TAG#v}"
+          echo "Updating version to $CLEAN_VERSION"
+          npm version --no-git-tag-version $CLEAN_VERSION
+
+          npm install -g @vscode/vsce
+          vsce package --out "wsl-here-${CLEAN_VERSION}.vsix" --allow-missing-repository
+        env:
+          NEW_TAG: ${{ steps.tag_version.outputs.new_tag }}
+
       - name: Create GitHub Release
         if: ${{ steps.tag_version.outputs.new_tag }}
         uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ steps.tag_version.outputs.new_tag }}
           name: ${{ steps.tag_version.outputs.new_tag }}
+          files: "*.vsix"
           generate_release_notes: true
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
